@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Store</title>
+    <title>Indiska SpiceNord</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
@@ -455,7 +455,7 @@
                          onerror="this.src='https://via.placeholder.com/300x250?text=Image+Not+Found'">
                     <div class="product-info">
                         <div class="product-name">${product.name}</div>
-                        <div class="product-price">$${product.price}</div>
+                        <div class="product-price">kr ${product.price}</div>
                         <button class="add-to-cart" onclick="addToCart(${product.id})">
                             Add to Cart
                         </button>
@@ -518,13 +518,13 @@
         function showCart() {
             if (cart.length === 0) {
                 cartItems.innerHTML = '<div style="text-align: center; padding: 40px; color: #718096;">Your cart is empty</div>';
-                cartTotal.textContent = 'Total: $0.00';
+                cartTotal.textContent = 'Total: 0.00 kr';
             } else {
                 cartItems.innerHTML = cart.map(item => `
                     <div class="cart-item">
                         <div>
                             <div style="font-weight: 600;">${item.name}</div>
-                            <div style="color: #718096;">$${item.price} each</div>
+                            <div style="color: #718096;">${item.price} kr each</div>
                         </div>
                         <div class="quantity-controls">
                             <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
@@ -536,7 +536,7 @@
                 `).join('');
                 
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+                cartTotal.textContent = `Total: ${total.toFixed(2)}`;
             }
             
             cartModal.style.display = 'block';
@@ -574,7 +574,7 @@
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const itemsList = cart.map(item => `${item.name} x${item.quantity}`).join('\n');
             
-            alert(`Order Summary:\n\n${itemsList}\n\nTotal: $${total.toFixed(2)}\n\nThank you for your order!\n\n(In a real implementation, this would redirect to a payment processor like Stripe)`);
+            alert(`Order Summary:\n\n${itemsList}\n\nTotal: ${total.toFixed(2)}\n\nThank you for your order!\n\n(In a real implementation, this would redirect to a payment processor like Stripe)`);
             
             // Clear cart after checkout
             cart = [];
