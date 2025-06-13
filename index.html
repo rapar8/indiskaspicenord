@@ -51,23 +51,27 @@
     let totalCount = 0;
 
     async function fetchProducts(page = 1) {
-      const from = (page - 1) * pageSize;
-      const to = from + pageSize - 1;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
 
-      const { data, error, count } = await supabase
-        .from('products')
-        .select('*', { count: 'exact' })
-        .range(from, to);
+  const { data, error, count } = await supabase
+    .from('products')
+    .select('*', { count: 'exact' })
+    .range(from, to);
 
-      if (error) {
-        console.error('Error fetching data:', error);
-        return;
-      }
+  console.log('DATA:', data);
+  console.log('ERROR:', error);
 
-      totalCount = count;
-      renderProducts(data);
-      updatePageInfo();
-    }
+  if (error) {
+    alert('Failed to fetch: ' + error.message);
+    return;
+  }
+
+  totalCount = count;
+  renderProducts(data);
+  updatePageInfo();
+}
+
 
     function renderProducts(products) {
       const list = document.getElementById('product-list');
