@@ -1,111 +1,105 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Product List with Pagination</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta charset="UTF-8" />
+  <title>Product List</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
     }
-
-    #product-list {
-      list-style: none;
-      padding: 0;
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
     }
-
-    #product-list li {
-      background: #f4f4f4;
-      margin-bottom: 8px;
-      padding: 12px;
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px;
+      width: 220px;
+      box-shadow: 1px 1px 6px #ccc;
+      background-color: #fff;
+    }
+    .product-card img {
+      max-width: 100%;
+      height: auto;
       border-radius: 4px;
     }
-
-    .pagination {
-      margin-top: 20px;
+    .product-card h3 {
+      font-size: 1.1rem;
+      margin: 10px 0 5px;
     }
-
-    .pagination button {
-      margin: 0 4px;
-      padding: 8px 12px;
+    .product-card p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+    .load-more {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>Product List</h1>
-  <ul id="product-list"></ul>
-  <div class="pagination">
-    <button onclick="prevPage()">Previous</button>
-    <span id="page-info"></span>
-    <button onclick="nextPage()">Next</button>
-  </div>
 
-  <script>
-    const supabaseUrl = 'https://gusjsjowebsrocsamcyu.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1c2pzam93ZWJzcm9jc2FtY3l1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk0MTYzNzksImV4cCI6MjA2NDk5MjM3OX0.dHsyctJfzWBe-Atx9NjWbc6YwET-d0TTgJfQyT-VAoM';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+<h2>Products</h2>
+<div class="product-list" id="product-list"></div>
+<button class="load-more" onclick="loadMore()">Load More</button>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const supabaseUrl = 'https://gusjsjowebsrocsamcyu.supabase.co'; 
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1c2pzam93ZWJzcm9jc2FtY3l1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk0MTYzNzksImV4cCI6MjA2NDk5MjM3OX0.dHsyctJfzWBe-Atx9NjWbc6YwET-d0TTgJfQyT-VAoM'; 
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-    const pageSize = 20;
-    let currentPage = 1;
-    let totalCount = 0;
+  const GITHUB_IMAGES_BASE_URL = 'https://raw.githubusercontent.com/rapar8/indiskaspicenord/main/images/';
 
-    async function fetchProducts(page = 1) {
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
+  let page = 0;
+  const limit = 20;
 
-  const { data, error, count } = await supabase
-    .from('products')
-    .select('*', { count: 'exact' })
-    .range(from, to);
+  async function loadMore() {
+    const from = page * limit;
+    const to = from + limit - 1;
 
-  console.log('DATA:', data);
-  console.log('ERROR:', error);
+    const { data: products, error } = await supabase
+      .from('products')
+      .select('*')
+      .range(from, to);
 
-  if (error) {
-    alert('Failed to fetch: ' + error.message);
-    return;
+    if (error) {
+      console.error('Error fetching products:', error.message);
+      return;
+    }
+
+    renderProducts(products);
+    page++;
   }
 
-  totalCount = count;
-  renderProducts(data);
-  updatePageInfo();
-}
+  function renderProducts(products) {
+    const container = document.getElementById('product-list');
+    products.forEach(product => {
+      const imageFile = product.image || product.image_url;
+      const imageUrl = imageFile ? `${GITHUB_IMAGES_BASE_URL}${imageFile}` : '';
 
+      const card = document.createElement('div');
+      card.className = 'product-card';
 
-    function renderProducts(products) {
-      const list = document.getElementById('product-list');
-      list.innerHTML = '';
-      products.forEach((product) => {
-        const li = document.createElement('li');
-        li.textContent = product.name || 'Unnamed Product';
-        list.appendChild(li);
-      });
-    }
+      card.innerHTML = `
+        ${imageUrl ? `<img src="${imageUrl}" alt="${product.name}">` : ''}
+        <h3>${product.name}</h3>
+        <p><strong>Price:</strong> ${product.price ? product.price + ' kr' : 'N/A'}</p>
+        <p>${product.description || ''}</p>
+      `;
+      container.appendChild(card);
+    });
+  }
 
-    function updatePageInfo() {
-      const totalPages = Math.ceil(totalCount / pageSize);
-      document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages}`;
-    }
+  // Load the first page
+  loadMore();
+</script>
 
-    function nextPage() {
-      const totalPages = Math.ceil(totalCount / pageSize);
-      if (currentPage < totalPages) {
-        currentPage++;
-        fetchProducts(currentPage);
-      }
-    }
-
-    function prevPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        fetchProducts(currentPage);
-      }
-    }
-
-    // Initial load
-    fetchProducts(currentPage);
-  </script>
 </body>
 </html>
