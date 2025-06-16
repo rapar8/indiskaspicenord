@@ -7,7 +7,7 @@ export default function Home() {
             <p>Your one-stop Indian grocery shop in Helsingborg</p>
 
             <div style={{ marginTop: '2rem' }}>
-                <Link to="/order">
+                <Link to="/order-online">
                     <button style={{ margin: '1rem', padding: '1rem 2rem' }}>🛒 Order Online</button>
                 </Link>
 

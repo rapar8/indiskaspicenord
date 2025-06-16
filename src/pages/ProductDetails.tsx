@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { Link } from 'react-router-dom';
 
 const GITHUB_IMAGES_BASE_URL = 'https://raw.githubusercontent.com/rapar8/indiskaspicenord/main/images/';
 
@@ -9,72 +9,64 @@ type Product = {
     name: string;
     image: string | null;
     price: number;
+    description: string | null;
     category: string | null;
+    // Add more fields if needed later (like youtube_url, nutrition)
 };
 
-export default function OrderOnline() {
-    const [products, setProducts] = useState<Product[]>([]);
+export default function ProductDetail() {
+    const { id } = useParams<{ id: string }>();
+    const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchProduct = async () => {
             setLoading(true);
             const { data, error } = await supabase
                 .from('products')
-                .select('id, name, price, image, category')
-                .order('id', { ascending: true })
-                .limit(20); // later: paginate
+                .select('id, name, price, image, description, category')
+                .eq('id', id)
+                .single();
 
             if (error) {
-                console.error('Error fetching products:', error.message);
+                console.error('Error fetching product:', error.message);
             } else {
-                setProducts(data);
+                setProduct(data);
             }
 
             setLoading(false);
         };
 
-        fetchProducts();
-    }, []);
+        fetchProduct();
+    }, [id]);
+
+    if (loading) return <p>Loading...</p>;
+
+    if (!product) return <p>Product not found.</p>;
 
     return (
-        <div style={{ display: 'flex' }}>
-            {/* Categories - future implementation */}
-            <aside style={{ width: '200px', padding: '1rem', borderRight: '1px solid #ccc' }}>
-                <h3>Categories</h3>
-                {/* Later: make categories dynamic */}
-                <ul>
-                    <li>All</li>
-                    <li>Spices</li>
-                    <li>Snacks</li>
-                    <li>Pulses</li>
-                </ul>
-            </aside>
+        <div style={{ padding: '1rem' }}>
+            <Link to="/order-online">&larr; Back to products</Link>
 
-            <main style={{ flexGrow: 1, padding: '1rem' }}>
-                <h2>Products</h2>
+            <h2>{product.name}</h2>
+            {product.image && (
+                <img
+                    src={GITHUB_IMAGES_BASE_URL + product.image}
+                    alt={product.name}
+                    style={{ width: '300px', height: 'auto', marginBottom: '1rem' }}
+                />
+            )}
+            <p><strong>Price:</strong> {product.price} kr</p>
+            <p><strong>Category:</strong> {product.category || 'N/A'}</p>
 
-                {loading ? (
-                    <p>Loading...</p>
-                ) : (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-                        {products.map(product => (
-                            <div key={product.id} style={{ border: '1px solid #ccc', padding: '1rem', width: '180px' }}>
-                                <Link to={`/product/${product.id}`}>
-                                    <img
-                                        src={GITHUB_IMAGES_BASE_URL + product.image}
-                                        alt={product.name}
-                                        style={{ width: '100%', height: 'auto' }}
-                                    />
-                                    <h4>{product.name}</h4>
-                                </Link>
-                                <p>Price: {product.price} kr</p>
-                                <button>Add to Cart</button>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </main>
+            {product.description && (
+                <>
+                    <h4>Description & Uses:</h4>
+                    <p>{product.description}</p>
+                </>
+            )}
+
+            {/* Future enhancements like nutrition info or embedded YouTube link can be added here */}
         </div>
     );
 }
