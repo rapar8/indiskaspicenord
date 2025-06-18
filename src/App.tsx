@@ -7,6 +7,7 @@ import Contact from './pages/ContactUs';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Header from './components/Header';
+import Checkout from "./pages/Checkout.tsx";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/checkout" element={<Checkout />} />
             </Routes>
         </>
     );

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+import FlashMessage from '../components/FlashMessage';
 
 const GITHUB_IMAGES_BASE_URL = 'https://raw.githubusercontent.com/rapar8/indiskaspicenord/main/images/';
 
@@ -22,6 +23,7 @@ export default function OrderOnline() {
     const [searchQuery, setSearchQuery] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const { addToCart } = useCart();
+    const [flashMessage, setFlashMessage] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -64,7 +66,7 @@ export default function OrderOnline() {
             image: product.image,
         });
 
-        alert(`${product.name} added to cart!`);
+        setFlashMessage(`${product.name} added to cart!`);
     };
 
     return (
@@ -98,6 +100,9 @@ export default function OrderOnline() {
                     <p>No products found.</p>
                 ) : (
                     <>
+                        {flashMessage && (
+                            <FlashMessage message={flashMessage} onClose={() => setFlashMessage(null)} />
+                        )}
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
                             {products.map(product => (
                                 <div key={product.id} style={{ border: '1px solid #ccc', padding: '1rem', width: '180px' }}>
