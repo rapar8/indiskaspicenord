@@ -1,5 +1,4 @@
-// src/components/FlashMessage.tsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 type FlashMessageProps = {
     message: string;
@@ -8,6 +7,11 @@ type FlashMessageProps = {
 
 export default function FlashMessage({ message, onClose }: FlashMessageProps) {
     const [progress, setProgress] = useState(100);
+
+    // Memoize onClose to prevent unnecessary re-renders
+    const handleClose = useCallback(() => {
+        onClose();
+    }, [onClose]);
 
     useEffect(() => {
         const totalDuration = 5000; // 5 seconds
@@ -18,8 +22,8 @@ export default function FlashMessage({ message, onClose }: FlashMessageProps) {
             setProgress(prev => {
                 const next = prev - decrement;
                 if (next <= 0) {
-                    clearInterval(timer);
-                    onClose();
+                    // Schedule the onClose call for the next tick to avoid state update during render
+                    setTimeout(() => handleClose(), 0);
                     return 0;
                 }
                 return next;
@@ -27,7 +31,7 @@ export default function FlashMessage({ message, onClose }: FlashMessageProps) {
         }, interval);
 
         return () => clearInterval(timer);
-    }, [onClose]);
+    }, [handleClose]);
 
     return (
         <div
@@ -48,7 +52,7 @@ export default function FlashMessage({ message, onClose }: FlashMessageProps) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span>{message}</span>
                 <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     style={{
                         background: 'none',
                         border: 'none',

@@ -11,6 +11,10 @@ export default function Header() {
             <Link to="/cart" style={{ textDecoration: 'none' }}>
                 🛒 Cart ({totalItems})
             </Link>
+            <Link to="/cooking-interest" style={{ marginLeft: '1rem' }}>
+                🍳 Cooking Interest
+            </Link>
         </header>
+
     );
 }
