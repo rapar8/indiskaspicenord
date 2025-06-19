@@ -105,18 +105,49 @@ export default function OrderOnline() {
                         )}
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
                             {products.map(product => (
-                                <div key={product.id} style={{ border: '1px solid #ccc', padding: '1rem', width: '180px' }}>
-                                    <Link to={`/product/${product.id}`}>
+                                <div
+                                    key={product.id}
+                                    style={{
+                                        border: '1px solid #ccc',
+                                        padding: '1rem',
+                                        width: '213px',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        justifyContent: 'flex-start',
+                                        height: '100%', // ensure stretch
+                                        minHeight: '320px', // force consistent height
+                                    }}
+                                >
+                                    <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         <img
                                             src={GITHUB_IMAGES_BASE_URL + product.image}
                                             alt={product.name}
                                             style={{ width: '100%', height: 'auto' }}
                                         />
-                                        <h4>{product.name}</h4>
+                                        <h4
+                                            style={{
+                                                margin: '0.5rem 0',
+                                                minHeight: '3em', // Optional: space for at least 2 lines
+                                            }}
+                                        >
+                                            {product.name}
+                                        </h4>
                                     </Link>
-                                    <p>Price: {product.price} kr</p>
-                                    <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
+
+                                    {/* PUSH THIS SECTION TO BOTTOM */}
+                                    <div
+                                        style={{
+                                            marginTop: 'auto',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <span>{product.price} kr</span>
+                                        <button onClick={() => handleAddToCart(product)}>Add</button>
+                                    </div>
                                 </div>
+
                             ))}
 
                         </div>

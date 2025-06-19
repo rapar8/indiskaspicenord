@@ -6,13 +6,14 @@ export default function Header() {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
-        <header style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid #ccc' }}>
-            <Link to="/" style={{ textDecoration: 'none', fontWeight: 'bold' }}>Indiska Spice Nord</Link>
+        <header style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid #ddd' }}>
+            <Link to="/" style={{ textDecoration: 'none', fontWeight: 'bold',  }}><img
+                src="/indi1.2.png"
+                alt="Indiska SpiceNord"
+                style={{ height: '50px' }} // Adjust height as needed
+            /></Link>
             <Link to="/cart" style={{ textDecoration: 'none' }}>
                 🛒 Cart ({totalItems})
-            </Link>
-            <Link to="/cooking-interest" style={{ marginLeft: '1rem' }}>
-                🍳 Cooking Interest
             </Link>
         </header>
 

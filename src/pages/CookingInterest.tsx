@@ -112,7 +112,7 @@ export default function CookingInterestForm() {
         border: '1px solid #ddd',
         borderRadius: '8px',
         backgroundColor: '#f9f9f9',
-        fontFamily: 'Arial, sans-serif'
+        fontFamily: 'Lato, sans-serif'
     } as const;
 
     const labelStyle: CSSProperties = {

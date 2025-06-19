@@ -1,7 +1,8 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: Lato, sans-serif;
+  line-height: 1.6;
+  font-weight: 500;
+  font-size: 1.25rem;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -11,6 +12,20 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 98%;
+  background-color: white;
+  z-index: 50;
+  height: 60px; /* or 70px */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 a {
@@ -26,11 +41,12 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  width: 100%;
   min-width: 320px;
   min-height: 100vh;
   background-color: #ffffff;
   color: #000000;
-  font-family: Arial, sans-serif;
+  font-family: Lato, sans-serif;
 }
 
 h1 {
@@ -39,15 +55,36 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
   cursor: pointer;
-  transition: border-color 0.25s;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  font-family: Lato, sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  text-transform: uppercase;
+  min-width: 64px;
+  color: rgb(0, 87, 118);
+  outline: 0;
+  margin: 0;
+  text-decoration: none;
+  padding: 5px 15px;
+  border-radius: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 87, 118, 0.5);
+  border-image: initial;
 }
 button:hover {
   border-color: #646cff;
