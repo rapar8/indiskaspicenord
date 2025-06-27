@@ -12,9 +12,11 @@ export default function Header() {
                 alt="Indiska SpiceNord"
                 style={{ height: '50px' }} // Adjust height as needed
             /></Link>
+            <div className="text-4xl text-amber-700">Webbplatsen är under uppbyggnad</div>
             <Link to="/cart" style={{ textDecoration: 'none' }}>
                 🛒 Cart ({totalItems})
             </Link>
+
         </header>
 
     );

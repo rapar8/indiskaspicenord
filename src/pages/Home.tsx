@@ -2,23 +2,22 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
     return (
-        <div style={{ padding: '2rem', textAlign: 'center' }}>
-
-            <div style={{ marginTop: '2rem' }}>
+        <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center bg-white">
+            <div className="flex flex-col gap-4 w-full max-w-sm">
                 <Link to="/order-online">
-                    <button style={{ margin: '1rem', padding: '1rem 2rem' }}>🛒 Order Online</button>
+                    <button className="w-full py-3 px-6 rounded bg-green-600 text-white text-lg shadow hover:bg-green-700 transition">
+                        🛒 Order Online
+                    </button>
                 </Link>
 
                 <Link to="/cooking-interest">
-                    <button style={{ margin: '1rem', padding: '1rem 2rem' }}>👩‍🍳 Want to Learn Cooking?</button>
+                    <button className="w-full py-3 px-6 rounded bg-yellow-500 text-white text-lg shadow hover:bg-yellow-600 transition">
+                        👩‍🍳 Want to Learn Indian Cooking?
+                    </button>
                 </Link>
             </div>
 
-            <footer style={{ marginTop: '4rem', fontSize: '0.9rem', color: '#666' }}>
-                <p>📍 Regementsvägen 4A, 254 57 Helsingborg</p>
-                <p>🕒 Open: Weekdays & Weekends</p>
-                <p>📧 <Link to="/contact">Contact Us</Link></p>
-            </footer>
+
         </div>
     );
 }

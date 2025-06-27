@@ -49,15 +49,15 @@ export default function Cart() {
                             {item.name}
                         </td>
                         <td>
-                            <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
+                            <button className="button-compact" onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
                                 -
                             </button>
                             <span style={{ margin: '0 0.5rem' }}>{item.quantity}</span>
-                            <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                            <button className="button-compact" onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
                         </td>
-                        <td>{(item.price * item.quantity).toFixed(2)} kr</td>
+                        <td>{(item.price * item.quantity).toFixed(2)}</td>
                         <td>
-                            <button onClick={() => removeFromCart(item.id)}>🗑</button>
+                            <button className="button-compact" onClick={() => removeFromCart(item.id)}>🗑</button>
                         </td>
                     </tr>
                 ))}
