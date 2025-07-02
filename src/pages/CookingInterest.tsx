@@ -105,7 +105,7 @@ export default function CookingInterestForm() {
     const sectionStyle = {
         display: 'flex',
         flexDirection: 'column',
-        gap: '1rem',
+        gap: '1.5rem',
         maxWidth: '600px',
         margin: '2rem auto',
         padding: '2rem',
@@ -116,9 +116,15 @@ export default function CookingInterestForm() {
     } as const;
 
     const labelStyle: CSSProperties = {
-        display: 'flex',
-        flexDirection: 'column',
-        fontWeight: 500
+        position: 'absolute',
+        top: '-8px',
+        left: '12px',
+        backgroundColor: '#f9f9f9',
+        padding: '0 8px',
+        fontSize: '14px',
+        fontWeight: 500,
+        color: '#005776',
+        zIndex: 1
     };
 
     const checkboxGroupStyle: CSSProperties = {
@@ -127,43 +133,110 @@ export default function CookingInterestForm() {
         gap: '0.5rem',
         marginTop: '0.5rem'
     };
+    const labelStyleCookingInterested: CSSProperties =
+        {margin: '0 0 1rem 0', color: '#005776', textAlign: 'left'};
+
+    const inputStyle: CSSProperties = {
+        width: '100%',
+        padding: '12px 16px',
+        border: '2px solid #005776',
+        borderRadius: '8px',
+        fontSize: '16px',
+        backgroundColor: 'white',
+        outline: 'none',
+        transition: 'border-color 0.3s ease',
+        boxSizing: 'border-box'
+    };
+
+    const selectStyle: CSSProperties = {
+        ...inputStyle,
+        cursor: 'pointer'
+    };
+
+    const textareaStyle: CSSProperties = {
+        ...inputStyle,
+        resize: 'vertical',
+        minHeight: '80px'
+    };
+
+    const fieldContainerStyle: CSSProperties = {
+        position: 'relative',
+        marginBottom: '0.5rem'
+    };
+
+    const checkboxLabelStyle: CSSProperties = {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        padding: '0.5rem',
+        border: '1px solid #ddd',
+        borderRadius: '4px',
+        backgroundColor: 'white',
+        cursor: 'pointer',
+        fontSize: '14px'
+    };
+
+
 
     return (
         <>
             {flash && <FlashMessage message={flash} onClose={() => setFlash(null)} />}
-            <form onSubmit={handleSubmit} style={sectionStyle}>
-                <h2 style={{textAlign: 'center'}}>🍳 Cooking Interest Form</h2>
+            <div style={sectionStyle}>
+                <h2 style={{textAlign: 'center', color: '#005776', marginBottom: '2rem'}}>🍳 Cooking Interest Form</h2>
 
-                <label style={labelStyle}>
-                    Name:
-                    <input name="name" value={form.name} onChange={handleChange} required/>
-                </label>
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>Name</span>
+                    <input
+                        name="name"
+                        value={form.name}
+                        onChange={handleChange}
+                        required
+                        style={inputStyle}
+                    />
+                </div>
 
-                <label style={labelStyle}>
-                    Email:
-                    <input name="email" type="email" value={form.email} onChange={handleChange} required/>
-                </label>
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>Email</span>
+                    <input
+                        name="email"
+                        type="email"
+                        value={form.email}
+                        onChange={handleChange}
+                        required
+                        style={inputStyle}
+                    />
+                </div>
 
-                <label style={labelStyle}>
-                    Group or Private:
-                    <select name="group_or_private" value={form.group_or_private} onChange={handleChange}>
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>Group or Private</span>
+                    <select
+                        name="group_or_private"
+                        value={form.group_or_private}
+                        onChange={handleChange}
+                        style={selectStyle}
+                    >
                         <option value="group">Group</option>
                         <option value="private">Private</option>
                     </select>
-                </label>
+                </div>
 
                 {form.group_or_private === 'private' && (
-                    <label style={labelStyle}>
-                        Preferred Location:
-                        <select name="preferred_location" value={form.preferred_location} onChange={handleChange}>
+                    <div style={fieldContainerStyle}>
+                        <span style={labelStyle}>Preferred Location</span>
+                        <select
+                            name="preferred_location"
+                            value={form.preferred_location}
+                            onChange={handleChange}
+                            style={selectStyle}
+                        >
                             <option value="myHome">My Home</option>
                             <option value="company">Arrange by Company</option>
                         </select>
-                    </label>
+                    </div>
                 )}
 
-                <label style={labelStyle}>
-                    Number of Sessions:(2-3 hours per session)
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>Number of Sessions (2-3 hours per session)</span>
                     <input
                         name="number_of_sessions"
                         type="number"
@@ -171,32 +244,43 @@ export default function CookingInterestForm() {
                         onChange={handleChange}
                         min={1}
                         max={10}
+                        style={inputStyle}
                     />
-                </label>
+                </div>
 
-                <label style={labelStyle}>
-                    Veg or Non-Veg:
-                    <select name="veg_or_nonveg" value={form.veg_or_nonveg} onChange={handleChange}>
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>Veg or Non-Veg</span>
+                    <select
+                        name="veg_or_nonveg"
+                        value={form.veg_or_nonveg}
+                        onChange={handleChange}
+                        style={selectStyle}
+                    >
                         <option value="veg">Veg</option>
                         <option value="nonveg">Non-Veg</option>
                         <option value="both">Both</option>
                     </select>
-                </label>
+                </div>
 
-                <label style={labelStyle}>
-                    Cooking Experience:
-                    <select name="cooking_experience" value={form.cooking_experience} onChange={handleChange}>
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>Cooking Experience</span>
+                    <select
+                        name="cooking_experience"
+                        value={form.cooking_experience}
+                        onChange={handleChange}
+                        style={selectStyle}
+                    >
                         <option value="beginner">Beginner</option>
                         <option value="intermediate">Intermediate</option>
                         <option value="advanced">Advanced</option>
                     </select>
-                </label>
+                </div>
 
                 <div>
-                    <label style={labelStyle}>Interested Cuisines:</label>
+                    <h4 style={labelStyleCookingInterested}>Interested Cuisines:</h4>
                     <div style={checkboxGroupStyle}>
                         {['Indian', 'South Indian', 'Snacks', 'Fusion'].map(cuisine => (
-                            <label key={cuisine}>
+                            <label key={cuisine} style={checkboxLabelStyle}>
                                 <input
                                     type="checkbox"
                                     checked={form.interested_cuisines.includes(cuisine)}
@@ -209,10 +293,10 @@ export default function CookingInterestForm() {
                 </div>
 
                 <div>
-                    <label style={labelStyle}>Available Days:</label>
+                    <h4 style={labelStyleCookingInterested}>Available Days:</h4>
                     <div style={checkboxGroupStyle}>
-                        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
-                            <label key={day}>
+                        {['Weekdays', 'Fri', 'Sat', 'Sun'].map(day => (
+                            <label key={day} style={checkboxLabelStyle}>
                                 <input
                                     type="checkbox"
                                     checked={form.available_days.includes(day)}
@@ -224,28 +308,31 @@ export default function CookingInterestForm() {
                     </div>
                 </div>
 
-                <label style={labelStyle}>
-                    Additional Notes:
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>Additional Notes</span>
                     <textarea
                         name="additional_notes"
                         value={form.additional_notes}
                         onChange={handleChange}
                         rows={3}
+                        style={textareaStyle}
                     />
-                </label>
+                </div>
 
-                <button type="submit" style={{
+                <button type="button" onClick={handleSubmit} style={{
                     padding: '0.75rem 1.5rem',
                     fontSize: '1rem',
-                    backgroundColor: '#0066cc',
+                    backgroundColor: '#005776',
                     color: '#fff',
                     border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    marginTop: '1rem',
+                    transition: 'background-color 0.3s ease'
                 }}>
                     Submit
                 </button>
-            </form>
+            </div>
         </>
     );
 }

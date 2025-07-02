@@ -137,7 +137,7 @@ button {
 button:hover {
   text-decoration: none;
   background-color: rgba(0, 87, 118, 0.04);
-  border-color: rgb(0, 87, 118);
+  border-color: rgb(0, 87, 118); /* #005776 */
 }
 button.Mui-disabled {
   pointer-events: none;
