@@ -17,6 +17,7 @@ type FormData = {
 };
 
 export default function CookingInterestForm() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [form, setForm] = useState<FormData>({
         name: '',
         email: '',
@@ -47,6 +48,7 @@ export default function CookingInterestForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
 
         // 1. Insert into Supabase
         const { error: dbError } = await supabase
@@ -319,18 +321,20 @@ export default function CookingInterestForm() {
                     />
                 </div>
 
-                <button type="button" onClick={handleSubmit} style={{
+                <button type="button"
+                        disabled={isSubmitting}
+                        onClick={handleSubmit} style={{
                     padding: '0.75rem 1.5rem',
                     fontSize: '1rem',
-                    backgroundColor: '#005776',
+                    backgroundColor: isSubmitting ? '#999' : '#005776',
                     color: '#fff',
                     border: 'none',
                     borderRadius: '8px',
-                    cursor: 'pointer',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
                     marginTop: '1rem',
                     transition: 'background-color 0.3s ease'
                 }}>
-                    Överlämnat
+                    {isSubmitting ? 'Skickar...' : 'Överlämnat'}
                 </button>
             </div>
         </>
