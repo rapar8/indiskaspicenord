@@ -182,10 +182,10 @@ export default function CookingInterestForm() {
         <>
             {flash && <FlashMessage message={flash} onClose={() => setFlash(null)} />}
             <div style={sectionStyle}>
-                <h2 style={{textAlign: 'center', color: '#005776', marginBottom: '2rem'}}>🍳 Cooking Interest Form</h2>
+                <h2 style={{textAlign: 'center', color: '#005776', marginBottom: '2rem'}}>🍳 Intresseformulär för matlagning</h2>
 
                 <div style={fieldContainerStyle}>
-                    <span style={labelStyle}>Name</span>
+                    <span style={labelStyle}>Namn</span>
                     <input
                         name="name"
                         value={form.name}
@@ -196,7 +196,7 @@ export default function CookingInterestForm() {
                 </div>
 
                 <div style={fieldContainerStyle}>
-                    <span style={labelStyle}>Email</span>
+                    <span style={labelStyle}>E-post</span>
                     <input
                         name="email"
                         type="email"
@@ -208,7 +208,7 @@ export default function CookingInterestForm() {
                 </div>
 
                 <div style={fieldContainerStyle}>
-                    <span style={labelStyle}>Group or Private</span>
+                    <span style={labelStyle}>Grupp eller privat</span>
                     <select
                         name="group_or_private"
                         value={form.group_or_private}
@@ -222,21 +222,21 @@ export default function CookingInterestForm() {
 
                 {form.group_or_private === 'private' && (
                     <div style={fieldContainerStyle}>
-                        <span style={labelStyle}>Preferred Location</span>
+                        <span style={labelStyle}>Föredragen plats</span>
                         <select
                             name="preferred_location"
                             value={form.preferred_location}
                             onChange={handleChange}
                             style={selectStyle}
                         >
-                            <option value="myHome">My Home</option>
-                            <option value="company">Arrange by Company</option>
+                            <option value="myHome">Mitt hem</option>
+                            <option value="company">Ordna efter företag</option>
                         </select>
                     </div>
                 )}
 
                 <div style={fieldContainerStyle}>
-                    <span style={labelStyle}>Number of Sessions (2-3 hours per session)</span>
+                    <span style={labelStyle}>Antal sessioner (2–3 timmar per session)</span>
                     <input
                         name="number_of_sessions"
                         type="number"
@@ -277,9 +277,9 @@ export default function CookingInterestForm() {
                 </div>
 
                 <div>
-                    <h4 style={labelStyleCookingInterested}>Interested Cuisines:</h4>
+                    <h4 style={labelStyleCookingInterested}>Intresserade rätter:</h4>
                     <div style={checkboxGroupStyle}>
-                        {['Indian', 'South Indian', 'Snacks', 'Fusion'].map(cuisine => (
+                        {['Snabbt recept', 'Curry', 'Snacks'].map(cuisine => (
                             <label key={cuisine} style={checkboxLabelStyle}>
                                 <input
                                     type="checkbox"
@@ -293,9 +293,9 @@ export default function CookingInterestForm() {
                 </div>
 
                 <div>
-                    <h4 style={labelStyleCookingInterested}>Available Days:</h4>
+                    <h4 style={labelStyleCookingInterested}>Tillgängliga dagar:</h4>
                     <div style={checkboxGroupStyle}>
-                        {['Weekdays', 'Fri', 'Sat', 'Sun'].map(day => (
+                        {['Vardagar', 'Helgen'].map(day => (
                             <label key={day} style={checkboxLabelStyle}>
                                 <input
                                     type="checkbox"
@@ -309,7 +309,7 @@ export default function CookingInterestForm() {
                 </div>
 
                 <div style={fieldContainerStyle}>
-                    <span style={labelStyle}>Additional Notes</span>
+                    <span style={labelStyle}>Ytterligare information</span>
                     <textarea
                         name="additional_notes"
                         value={form.additional_notes}
@@ -330,7 +330,7 @@ export default function CookingInterestForm() {
                     marginTop: '1rem',
                     transition: 'background-color 0.3s ease'
                 }}>
-                    Submit
+                    Överlämnat
                 </button>
             </div>
         </>

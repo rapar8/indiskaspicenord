@@ -6,13 +6,13 @@ export default function Home() {
             <div className="flex flex-col gap-4 w-full max-w-sm">
                 <Link to="/order-online">
                     <button className="w-full py-3 px-6 rounded bg-green-600 text-white text-lg shadow hover:bg-green-700 transition">
-                        🛒 Order Online
+                        🛒 Beställ Online
                     </button>
                 </Link>
 
                 <Link to="/cooking-interest">
                     <button className="w-full py-3 px-6 rounded bg-yellow-500 text-white text-lg shadow hover:bg-yellow-600 transition">
-                        👩‍🍳 Want to Learn Indian Cooking?
+                        👩‍🍳 Vill du lära dig indisk matlagning?
                     </button>
                 </Link>
             </div>
