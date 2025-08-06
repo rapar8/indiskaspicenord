@@ -6,6 +6,7 @@ import FlashMessage from '../components/FlashMessage';
 type FormData = {
     name: string;
     email: string;
+    mobile: string;
     group_or_private: string;
     preferred_location: string;
     number_of_sessions: number;
@@ -21,6 +22,7 @@ export default function CookingInterestForm() {
     const [form, setForm] = useState<FormData>({
         name: '',
         email: '',
+        mobile: '',
         group_or_private: 'private',
         preferred_location: 'myHome',
         number_of_sessions: 1,
@@ -75,7 +77,15 @@ export default function CookingInterestForm() {
                         to_name: form.name,
                         to_email: form.email,
                         email: form.email,
+                        mobile: form.mobile,
                         num_sessions: form.number_of_sessions.toString(),
+                        group_or_private: form.group_or_private,
+                        preferred_location: form.preferred_location,
+                        veg_or_nonveg: form.veg_or_nonveg,
+                        cooking_experience: form.cooking_experience,
+                        interested_cuisines: form.interested_cuisines,
+                        available_days: form.available_days,
+                        additional_notes: form.additional_notes,
                     },
                 }),
             });
@@ -89,6 +99,7 @@ export default function CookingInterestForm() {
             setForm({
                 name: '',
                 email: '',
+                mobile: '',
                 group_or_private: 'private',
                 preferred_location: '',
                 number_of_sessions: 1,
@@ -208,6 +219,17 @@ export default function CookingInterestForm() {
                         style={inputStyle}
                     />
                 </div>
+                <div style={fieldContainerStyle}>
+                    <span style={labelStyle}>phone/mobile</span>
+                    <input
+                        name="mobile"
+                        type="mobile"
+                        value={form.mobile}
+                        onChange={handleChange}
+                        required
+                        style={inputStyle}
+                    />
+                </div>
 
                 <div style={fieldContainerStyle}>
                     <span style={labelStyle}>Grupp eller privat</span>
@@ -260,7 +282,7 @@ export default function CookingInterestForm() {
                     >
                         <option value="veg">Veg</option>
                         <option value="nonveg">Non-Veg</option>
-                        <option value="both">Both</option>
+                        <option value="both">Både</option>
                     </select>
                 </div>
 
@@ -272,9 +294,9 @@ export default function CookingInterestForm() {
                         onChange={handleChange}
                         style={selectStyle}
                     >
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
+                        <option value="beginner">Nybörjare</option>
+                        <option value="intermediate">Mellannivå</option>
+                        <option value="advanced">Avancerad</option>
                     </select>
                 </div>
 
