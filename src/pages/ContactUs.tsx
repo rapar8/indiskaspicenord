@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 export default function ContactUs() {
   return (
     <div className="contact-us-container">
-      <h1>Contact and Information</h1>
-      <p>Information from Indiska SpiceNord</p>
+        <div className='recall-header'>Contact and Information</div>
+        <div className='contact-page-info'>Information from Indiska SpiceNord</div>
 
       {/* Structured using paragraphs and Links for formatting */}
       <div>
         <p>
           {/* First Line: Recall and Complaint */}
-          <Link to="/recall">**Recall**</Link>
+          <Link to="/contact/recall">**Recall**</Link>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Link to="/complaint">**Complaint**</Link>
         </p>

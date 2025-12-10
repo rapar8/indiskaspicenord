@@ -152,6 +152,13 @@ button.Mui-disabled {
     font-weight: bold;
 }
 
+.contact-page-info {
+    padding-left: 25px; /* Adjust this value to control indentation */
+    margin-top: 5px;
+    padding-bottom: 25px;
+    padding-top: 100px;
+}
+
 .bullet-header {
     padding-left: 25px; /* Adjust this value to control indentation */
     margin-top: 5px;
