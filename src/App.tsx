@@ -9,11 +9,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Checkout from "./pages/Checkout.tsx";
 import Recall from './pages/Recall.tsx';
+import ScrollToTop from "./pages/ScrollToTop.tsx";
 
 function App() {
     return (
         <div className="flex flex-col min-h-screen"> {/* Ensure the app takes at least the full screen height */}
             <Header />
+            <ScrollToTop />
             {/* This div will contain all page content and will have a top padding to clear the fixed header. */}
             {/* pt-16 (64px) is appropriate for a 60px header with a little extra space. */}
             <div className="flex-grow pt-16">
