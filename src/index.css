@@ -144,3 +144,66 @@ button.Mui-disabled {
   cursor: default;
 }
 /* END: Generic button styles */
+
+.recall-header {
+    padding-left: 25px; /* Adjust this value to control indentation */
+    margin-top: 5px; 
+    background-color: burlywood;
+    font-weight: bold;
+}
+
+.bullet-header {
+    padding-left: 25px; /* Adjust this value to control indentation */
+    margin-top: 5px;
+    background-color:bisque ;
+    font-weight: bold;
+}
+
+/* Container for nested bullets, applies left padding for indentation */
+.bullet-container {
+    padding-left: 25px; /* Adjust this value to control indentation */
+    margin-top: 5px; 
+}
+
+/* Base class for a custom bullet point */
+.bullet-item {
+    position: relative;
+    padding-left: 15px; /* Space for the bullet marker */
+    margin-bottom: 8px; /* Space between items */
+    font-weight: bold;
+}
+/* Fix: Explicitly override the inherited font-weight for the nested item's text content */
+.bullet-item.secondary {
+  font-weight: normal;
+}
+/* Primary Bullet (Large Dot) */
+.bullet-item:not(.secondary):before {
+    content: '•'; /* Unicode for a large, solid bullet */
+    color: #333; /* Dark color for the bullet */
+    font-size: 1.2em;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Secondary/Nested Bullet (Open Circle) */
+.bullet-item.secondary:before {
+    content: '○'; /* Unicode for an open circle bullet */
+    color: #555; /* Slightly lighter color for secondary bullet */
+    font-size: 1em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: normal;
+}
+
+/* index.css - Ensure this is AFTER all Tailwind imports */
+
+/* This custom class is stronger and will override Tailwind's bg-gray-100 */
+.list-item-wrapper {
+  background-color: bisque !important; /* A light, noticeable gray */
+  padding: 15px !important;            /* Adds space around the text */
+  border-radius: 8px !important;       /* Rounded corners */
+  margin-bottom: 20px !important;      /* Space below the item */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for definition */
+}

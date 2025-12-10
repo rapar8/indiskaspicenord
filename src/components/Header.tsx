@@ -7,7 +7,7 @@ export default function Header() {
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
     // This condition will hide the text only on the cooking-interest page
-    const hideUnderConstruction = ['/', '/cooking-interest'].includes(location.pathname);
+    const hideUnderConstruction = ['/', '/cooking-interest', '/contact', '/recall'].includes(location.pathname);
 
     return (
         <header style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid #ddd' }}>

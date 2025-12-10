@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Checkout from "./pages/Checkout.tsx";
+import Recall from './pages/Recall.tsx';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/product/:id" element={<ProductDetails />} />
                     <Route path="/cooking-interest" element={<CookingInterest />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/recall" element={<Recall />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
                 </Routes>
